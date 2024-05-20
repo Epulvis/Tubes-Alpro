@@ -1,0 +1,40 @@
+[
+  {
+      "username": "user1",
+      "youtube_channel": "channel1",
+      "password": "pass1",
+      "status": "active",
+      "subscribers": 1000,
+      "balance": 500,
+      "videos": [
+          {
+              "title": "video1",
+              "duration": 10,
+              "view_count": 100,
+              "date": 20230101
+          },
+          {
+              "title": "video2",
+              "duration": 15,
+              "view_count": 200,
+              "date": 20230201
+          }
+      ]
+  },
+  {
+      "username": "user2",
+      "youtube_channel": "channel2",
+      "password": "pass2",
+      "status": "inactive",
+      "subscribers": 500,
+      "balance": 200,
+      "videos": [
+          {
+              "title": "video3",
+              "duration": 20,
+              "view_count": 300,
+              "date": 20230301
+          }
+      ]
+  }
+]
