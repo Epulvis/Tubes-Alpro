@@ -8,7 +8,7 @@ import (
 
 const DataFile = "accounts.json"
 
-const Nmax = 1000
+const Nmax = 200
 
 type Account struct {
 	Username       string    `json:"username"`
@@ -24,11 +24,17 @@ type Video struct {
 	Title     string `json:"title"`
 	Duration  int    `json:"duration"`
 	ViewCount int    `json:"view_count"`
-	Date      int    `json:"date"`
+	publish   Date   `json:"date"`
+}
+
+type Date struct {
+	date  int
+	month int
+	year  int
 }
 
 type VideoList [Nmax]Video
-type AccountList [Nmax]Account
+type AccountList [10]Account
 
 func ReadAccountsFromFile(filename string) (AccountList, error) {
 	var list AccountList
@@ -53,4 +59,28 @@ func ReadAccountsFromFile(filename string) (AccountList, error) {
 	}
 
 	return list, nil
+}
+
+func SaveAccountsToFile(filename string, data AccountList) error {
+	byteValue, err := json.MarshalIndent(data, "", "")
+	if err != nil {
+
+		return err
+	}
+
+	err = ioutil.WriteFile(filename, byteValue, 0644)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func CheckIndex(data AccountList) int {
+	for i, account := range data {
+		if account.Username == "" {
+			return i
+		}
+	}
+	return -1
 }

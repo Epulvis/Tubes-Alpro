@@ -1,22 +1,13 @@
 package component
 
-import (
-	"log"
-)
-
-func CheckIndex() int {
-	var count int
-	list, err := ReadAccountsFromFile(DataFile)
-	if err != nil {
-		log.Fatalf("Failed to read accounts from file: %s", err)
-	}
-
-	count = 0
-	for _, account := range list {
-		if account.Username != "" {
-			count++
+func CheckIndexAccount(A AccountList, x string) int {
+	var i int
+	i = 0
+	for i, account := range A {
+		if account.Username == x {
+			return i
 		}
+		i++
 	}
-
-	return count
+	return i
 }

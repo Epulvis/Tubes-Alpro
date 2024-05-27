@@ -22,9 +22,9 @@ func ShowHomepages() {
 
 		switch input {
 		case "1":
-			showDisplaysAccounts()
+			showDisplaysAllAccounts()
 		case "2":
-			//showLogin()
+			showDisplaysAccounts()
 		case "3":
 			showAddAccount()
 		case "4":
@@ -32,8 +32,8 @@ func ShowHomepages() {
 		case "5":
 			return
 		default:
-			fmt.Println("Pilihan tidak valid, silakan coba lagi.")
 			component.ClearScreen()
+			fmt.Println("Pilihan tidak valid, silakan coba lagi.")
 		}
 	}
 
@@ -42,7 +42,7 @@ func ShowHomepages() {
 func showMenu() {
 	fmt.Println("\n--- Menu ---")
 	fmt.Println("1. Tampilkan akun")
-	fmt.Println("2. Login")
+	fmt.Println("2. Tampilkan video")
 	fmt.Println("3. Tambah akun dan video")
 	fmt.Println("4. Hapus akun")
 	fmt.Println("5. Keluar")
