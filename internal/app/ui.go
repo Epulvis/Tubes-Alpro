@@ -1,7 +1,7 @@
-package pages
+package app
 
 import (
-	"YouTubeAdSenseAPP/component"
+	"YouTubeAdSenseAPP/internal/component"
 	"bufio"
 	"fmt"
 	"log"
@@ -17,7 +17,7 @@ func showDisplaysAllAccounts() {
 	fmt.Printf("| %-30s | %-20s | %-15s |  %-10s |\n", "Nama Pengguna", "ChannelYouTube", "Status", "Saldo")
 	fmt.Println(strings.Repeat("=", 89))
 
-	list, err := component.ReadAccountsFromFile(component.DataFile)
+	list, err := component.ReadData(component.DataFile)
 	if err != nil {
 		log.Fatalf("Failed to read accounts from file: %s", err)
 	}

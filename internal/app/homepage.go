@@ -1,7 +1,7 @@
-package pages
+package app
 
 import (
-	"YouTubeAdSenseAPP/component"
+	"YouTubeAdSenseAPP/internal/component"
 	"bufio"
 	"fmt"
 	"os"
@@ -36,7 +36,6 @@ func ShowHomepages() {
 			fmt.Println("Pilihan tidak valid, silakan coba lagi.")
 		}
 	}
-
 }
 
 func showMenu() {

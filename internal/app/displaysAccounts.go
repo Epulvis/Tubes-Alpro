@@ -1,7 +1,7 @@
-package pages
+package app
 
 import (
-	"YouTubeAdSenseAPP/component"
+	"YouTubeAdSenseAPP/internal/component"
 	"bufio"
 	"fmt"
 	"log"
@@ -10,12 +10,11 @@ import (
 
 func showDisplaysAccounts() {
 	var name string
-
 	reader := bufio.NewReader(os.Stdin)
 
-	data, err := component.ReadData()
+	data, err := component.ReadData(component.DataFile)
 	if err != nil {
-		log.Fatalf("Failed to read data: %v", err)
+		log.Fatalf("Gagal membaca data: %v", err)
 	}
 
 	component.ClearScreen()
@@ -25,7 +24,7 @@ func showDisplaysAccounts() {
 		fmt.Scanln(&name)
 
 		if component.SearchUsername(data, name) {
-			displaysAccounts(data, component.CheckIndexAccount(data, name))
+			displaysAccounts(data, component.CheckUsernameIndex(data, name))
 
 			fmt.Println("\nTekan 'Enter' untuk kembali ke menu...")
 			reader.ReadString('\n')
