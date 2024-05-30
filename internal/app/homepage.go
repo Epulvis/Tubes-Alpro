@@ -28,7 +28,7 @@ func ShowHomepages() {
 		case "3":
 			showAddAccount()
 		case "4":
-			//showDeleteAccount()
+			showDeleteAccount()
 		case "5":
 			return
 		default:

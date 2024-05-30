@@ -64,7 +64,8 @@ func showAddAccount() {
 		j++
 	}
 
-	data[i].Videos = component.InsertionSort(&data[i].Videos, j)
+	component.InsertionSort(&data[i].Videos, j)
+	data[i].Balance = component.BalanceCheck(data[i].Videos, data[i].Subscribers, i)
 
 	err = component.SaveData(component.DataFile, data)
 	if err != nil {
