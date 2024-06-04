@@ -2,7 +2,7 @@ package component
 
 const DataFile = "accounts.json"
 
-const Nmax = 200
+const Nmax = 20
 
 type Account struct {
 	Username       string    `json:"username"`

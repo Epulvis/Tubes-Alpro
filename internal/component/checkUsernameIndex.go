@@ -1,5 +1,7 @@
 package component
 
+import "fmt"
+
 func CheckUsernameIndex(A AccountList, x string) int {
 	var i int
 	i = 0
@@ -9,5 +11,6 @@ func CheckUsernameIndex(A AccountList, x string) int {
 		}
 		i++
 	}
+	fmt.Println(A[i])
 	return i
 }
