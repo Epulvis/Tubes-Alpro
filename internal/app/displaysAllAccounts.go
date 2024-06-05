@@ -13,7 +13,7 @@ func showDisplaysAllAccounts() {
 	reader := bufio.NewReader(os.Stdin)
 	component.ClearScreen()
 	fmt.Println("Menampilkan akun : ")
-	fmt.Println(strings.Repeat("=", 89))
+	fmt.Println("+", strings.Repeat("=", 89))
 	fmt.Printf("| %-30s | %-20s | %-15s |  %-10s |\n", "Nama Pengguna", "ChannelYouTube", "Status", "Saldo")
 	fmt.Println(strings.Repeat("=", 89))
 

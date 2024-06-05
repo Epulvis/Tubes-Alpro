@@ -39,9 +39,18 @@ func showDisplaysAccounts() {
 }
 
 func displaysAccounts(data component.AccountList, a int) {
-	fmt.Println(data[a].Username)
-	fmt.Println(data[a].YouTubeChannel)
-	fmt.Println(data[a].Subscribers)
-	fmt.Println(data[a].Status)
-	fmt.Println(data[a].Balance)
+	fmt.Printf("Username: %s\n", data[a].Username)
+	fmt.Printf("YouTube Channel: %s\n", data[a].YouTubeChannel)
+	fmt.Printf("Email: %s\n", data[a].Email)
+	fmt.Printf("Status: %s\n", data[a].Status)
+	fmt.Printf("Subscribers: %d\n", data[a].Subscribers)
+	fmt.Printf("Balance: %d\n", data[a].Balance)
+	for _, video := range data[a].Videos {
+		if video.Title != "" {
+			fmt.Printf("Video Title: %s\n", video.Title)
+			fmt.Printf("Duration: %d\n", video.Duration)
+			fmt.Printf("ViewCount: %d\n", video.ViewCount)
+			fmt.Printf("Publish Date: %02d-%02d-%04d\n", video.PublishDate.Day, video.PublishDate.Month, video.PublishDate.Year)
+		}
+	}
 }
