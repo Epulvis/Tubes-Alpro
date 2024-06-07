@@ -4,33 +4,39 @@ import (
 	"YouTubeAdSenseAPP/internal/component"
 	"bufio"
 	"fmt"
-	"log"
 	"os"
-	"strings"
 )
 
-func showDisplaysAllAccounts() {
-	reader := bufio.NewReader(os.Stdin)
+func ShowDisplaysAllAccounts(data *component.AccountList, index *int) {
+	var input, x string
+
+	scanner := bufio.NewScanner(os.Stdin)
 	component.ClearScreen()
-	fmt.Println("Menampilkan akun : ")
-	fmt.Println("+", strings.Repeat("=", 89))
-	fmt.Printf("| %-30s | %-20s | %-15s |  %-10s |\n", "Nama Pengguna", "ChannelYouTube", "Status", "Saldo")
-	fmt.Println(strings.Repeat("=", 89))
+	component.DisplaysAccounts(*data, *index)
 
-	list, err := component.ReadData(component.DataFile)
-	if err != nil {
-		log.Fatalf("Failed to read accounts from file: %s", err)
-	}
+	fmt.Println("\nPilih metode pencarian data akun YouTube:")
+	fmt.Println("1. Berdasarkan Channel")
+	fmt.Println("2. Berdasarkan Status")
+	fmt.Print("Masukkan pilihan Anda: ")
 
-	for i, account := range list {
-		if account.Username != "" {
-			fmt.Printf("| %-30s | %-20s | %-15s |  %-10d |\n", account.Username, account.YouTubeChannel, account.Status, account.Balance)
-			fmt.Println(strings.Repeat("-", 89))
-			i++
-		}
-	}
-
-	fmt.Println("\nTekan 'Enter' untuk kembali ke menu...")
-	reader.ReadString('\n')
+	scanner.Scan()
+	input = scanner.Text()
 	component.ClearScreen()
+
+	if input == "1" {
+		ShowDisplaysAccounts(&*data, &*index)
+
+	} else if input == "2" {
+		component.ClearScreen()
+		fmt.Print("Masukkan status: ")
+		fmt.Scanln(&x)
+		component.ClearScreen()
+		component.SequentialSearch(*data, *index, x)
+
+		fmt.Println("Tekan Enter untuk kembali ke menu utama...")
+		scanner.Scan()
+		component.ClearScreen()
+	} else {
+		fmt.Print("Pilihan tidak valid, silakan coba lagi.\n")
+	}
 }

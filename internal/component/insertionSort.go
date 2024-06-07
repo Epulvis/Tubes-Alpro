@@ -2,14 +2,16 @@ package component
 
 func InsertionSort(A *VideoList, n int) {
 	var i, j int
+	var key Video
 
-	for i = 0; i < n-1; i++ {
-		maxIdx := i
-		for j = i + 1; j < n; j++ {
-			if A[j].PublishDate.Year < A[maxIdx].PublishDate.Year && A[j].PublishDate.Month < A[maxIdx].PublishDate.Month && A[j].PublishDate.Day < A[maxIdx].PublishDate.Day {
-				maxIdx = j
-			}
+	for i = 1; i < n; i++ {
+		key = (*A)[i]
+		j = i - 1
+
+		for j >= 0 && compareDates((*A)[j].PublishDate, key.PublishDate) > 0 {
+			(*A)[j+1] = (*A)[j]
+			j = j - 1
 		}
-		A[i], A[maxIdx] = A[maxIdx], A[i]
+		(*A)[j+1] = key
 	}
 }

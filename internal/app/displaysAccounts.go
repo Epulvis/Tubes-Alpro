@@ -4,53 +4,39 @@ import (
 	"YouTubeAdSenseAPP/internal/component"
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 )
 
-func showDisplaysAccounts() {
+func ShowDisplaysAccounts(data *component.AccountList, n *int) {
 	var name string
+	var input byte
+	var index int
+
 	reader := bufio.NewReader(os.Stdin)
-
-	data, err := component.ReadData(component.DataFile)
-	if err != nil {
-		log.Fatalf("Gagal membaca data: %v", err)
-	}
-
 	component.ClearScreen()
-	for {
+	fmt.Print("\nMasukkan username: ")
+	fmt.Scanln(&name)
+	index = component.BinarySearch(*data, *n, name)
+	component.ClearScreen()
 
-		fmt.Print("username: ")
-		fmt.Scanln(&name)
-
-		if component.SearchUsername(data, name) {
-			displaysAccounts(data, component.CheckUsernameIndex(data, name))
-
-			fmt.Println("\nTekan 'Enter' untuk kembali ke menu...")
-			reader.ReadString('\n')
+	if index != -1 {
+		component.DisplaysAccount(*data, component.BinarySearch(*data, *n, name))
+		fmt.Println("Apakah Anda ingin mengedit data ini?(Y/n)")
+		input, _ = reader.ReadByte()
+		if input == 'Y' || input == 'y' {
 			component.ClearScreen()
-			return
+			component.AddAndEditAccount(&*data, index)
+			component.ClearScreen()
+			fmt.Print("Data berhasil diedit\n")
 
+		} else if input == 'n' || input == 'N' {
+			component.ClearScreen()
 		} else {
 			component.ClearScreen()
-			fmt.Println("Username tidak ditemukan, coba lagi.")
+			fmt.Print("Pilihan tidak valid, silakan coba lagi.\n")
 		}
-	}
-}
 
-func displaysAccounts(data component.AccountList, a int) {
-	fmt.Printf("Username: %s\n", data[a].Username)
-	fmt.Printf("YouTube Channel: %s\n", data[a].YouTubeChannel)
-	fmt.Printf("Email: %s\n", data[a].Email)
-	fmt.Printf("Status: %s\n", data[a].Status)
-	fmt.Printf("Subscribers: %d\n", data[a].Subscribers)
-	fmt.Printf("Balance: %d\n", data[a].Balance)
-	for _, video := range data[a].Videos {
-		if video.Title != "" {
-			fmt.Printf("Video Title: %s\n", video.Title)
-			fmt.Printf("Duration: %d\n", video.Duration)
-			fmt.Printf("ViewCount: %d\n", video.ViewCount)
-			fmt.Printf("Publish Date: %02d-%02d-%04d\n", video.PublishDate.Day, video.PublishDate.Month, video.PublishDate.Year)
-		}
+	} else {
+		fmt.Print("Username tidak ditemukan, coba lagi.\n")
 	}
 }

@@ -2,43 +2,26 @@ package app
 
 import (
 	"YouTubeAdSenseAPP/internal/component"
-	"bufio"
 	"fmt"
-	"log"
-	"os"
 )
 
-func showDeleteAccount() {
+func ShowDeleteAccount(data *component.AccountList, n *int) {
 	var name string
-	reader := bufio.NewReader(os.Stdin)
-
-	data, err := component.ReadData(component.DataFile)
-	if err != nil {
-		log.Fatalf("Gagal membaca data: %v", err)
-	}
+	var index int
 
 	component.ClearScreen()
-	for {
 
-		fmt.Print("username: ")
-		fmt.Scanln(&name)
+	fmt.Print("\nMasukkan username: ")
+	fmt.Scanln(&name)
+	index = component.BinarySearch(*data, *n, name)
 
-		if component.SearchUsername(data, name) {
-			component.DeleteAccount(&data, component.CheckIndex(data), component.CheckUsernameIndex(data, name))
+	if index != -1 {
+		component.ClearScreen()
+		component.DeleteAccount(*&data, *&n, index)
+		fmt.Print("Data berhasil di hapus\n")
 
-			err = component.SaveData(component.DataFile, data)
-			if err != nil {
-				log.Fatalf("gagal dalam menyimpan data: %v", err)
-			}
-
-			fmt.Println("\nTekan 'Enter' untuk kembali ke menu...")
-			reader.ReadString('\n')
-			component.ClearScreen()
-			return
-
-		} else {
-			component.ClearScreen()
-			fmt.Println("Username tidak ditemukan, coba lagi.")
-		}
+	} else {
+		component.ClearScreen()
+		fmt.Print("Username tidak ditemukan, coba lagi.\n")
 	}
 }

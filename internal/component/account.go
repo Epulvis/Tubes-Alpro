@@ -1,32 +1,30 @@
 package component
 
-const DataFile = "accounts.json"
-
 const Nmax = 20
 
 type Account struct {
-	Username       string    `json:"username"`
-	YouTubeChannel string    `json:"youtubeChannel"`
-	Email          string    `json:"email"`
-	Status         string    `json:"status"`
-	Subscribers    int       `json:"subscribers"`
-	Balance        int       `json:"balance"`
-	Videos         VideoList `json:"videos"`
+	Username       string
+	YouTubeChannel string
+	Email          string
+	Status         string
+	Subscribers    int
+	Balance        int
+	Videos         VideoList
 }
 
 type Video struct {
-	Title       string `json:"title"`
-	Duration    int    `json:"duration"`
-	ViewCount   int    `json:"viewCount"`
-	PublishDate Date   `json:"publishDate"`
+	Title       string
+	Duration    int
+	ViewCount   int
+	PublishDate Date
 }
 
 type Date struct {
-	Day   int `json:"day"`
-	Month int `json:"month"`
-	Year  int `json:"year"`
+	Day   int
+	Month int
+	Year  int
 }
 
 type VideoList [Nmax]Video
 
-type AccountList [10]Account
+type AccountList [Nmax]Account
